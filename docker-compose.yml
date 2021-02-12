@@ -1,0 +1,22 @@
+# this specify the version of docker compose that we trying to use with this formatted file we putting together now
+version: "3"
+# service is not same like exactly the container its like the type of container
+services:
+  # the first service that we are going to create is alias as redis-server
+  redis-server:
+    #  and inside of here we gonna specify the image that we want docker compose to use to create this service or this container
+    image: "redis"
+  # other second container notice I have indented a little bit right here we are going to create the node-app service
+  node-app:
+    # restart policy for our node-app service : always attempt to restart the server whenever error occurs
+    restart: always
+    # . means look in the current dir for docker file and use that to build the image that gonna be use to this container node-app
+    build: .
+    # now we have to specify all the different ports that we want to have to be opened up on this container.
+    ports:
+      # dash (-) in yml file specify an array
+      # so we are technically map many different posts inside of a single dock or compose file for a single service or single container
+      # but in our case we're going to map one set of ports
+      # so we're going to connect port 4001 on our local machine to 8081 inside the container
+      # port on local machine : port inside the container
+      - "4001:8081"
